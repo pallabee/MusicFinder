@@ -5,14 +5,14 @@ import {Album} from '../Album';
 import {MusicFinderService} from '../services/musicFinder.service';
 
 @Component({
-  selector: 'app-artist',
-  templateUrl: './artist.component.html',
-  styleUrls: ['./artist.component.css']
+  selector: 'app-album',
+  templateUrl: './album.component.html',
+  styleUrls: ['./album.component.css']
 })
-export class ArtistComponent implements OnInit {
+export class AlbumComponent implements OnInit {
   id:string;
-  artist:Artist[];
-  albums:Album[];
+
+  album:Album[];
 
   constructor(private _musicFinderService: MusicFinderService,
     private _route:ActivatedRoute) {
@@ -22,14 +22,10 @@ export class ArtistComponent implements OnInit {
     this._route.params
         .map(params=> params['id'])
         .subscribe((id)=>{
-          this._musicFinderService.getArtist(id)
-            .subscribe(artist => {
-              this.artist = artist;
+          this._musicFinderService.getAlbum(id)
+            .subscribe(album => {
+              this.album = album;
             })
-          this._musicFinderService.getAlbums(id)
-              .subscribe(albums => {
-                this.albums=albums.items;
-              })
         });
   }
 }
